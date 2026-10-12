@@ -72,6 +72,31 @@ def test_invalid_registration_input_is_rejected():
         },
     )
     assert response.status_code == 422
+    errors = response.json()["detail"]
+    assert isinstance(errors, list)
+    assert {tuple(error["loc"]) for error in errors} >= {
+        ("body", "full_name"),
+        ("body", "email"),
+        ("body", "password"),
+    }
+    assert next(error for error in errors if error["loc"] == ["body", "password"])["ctx"]["min_length"] == 8
+
+
+def test_registration_password_mismatch_is_reported_as_field_validation():
+    reset_db()
+    response = client.post(
+        "/api/auth/register",
+        json={
+            "full_name": "Morgan Lee",
+            "email": "morgan@example.com",
+            "password": "StrongPass!123",
+            "password_confirm": "DifferentPass!123",
+        },
+    )
+    assert response.status_code == 422
+    error = response.json()["detail"][0]
+    assert error["loc"] == ["body", "password_confirm"]
+    assert error["msg"] == "Value error, Passwords do not match."
 
 
 def test_login_with_invalid_credentials_is_generic():

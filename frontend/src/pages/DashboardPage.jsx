@@ -58,7 +58,6 @@ export default function DashboardPage() {
         <div className="panel panel-hero">
           <div className="topbar">
             <div>
-              <span className="topbar-label">ARCTIC EMERALD</span>
               <h1>Dashboard</h1>
             </div>
             <button className="ghost-btn" onClick={handleLogout} type="button">

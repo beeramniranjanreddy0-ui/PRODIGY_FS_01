@@ -49,50 +49,8 @@ export default function LoginPage() {
 
   return (
     <div className="app-shell">
-      <div className="auth-page">
-        <div className="auth-visual">
-          <div className="brand-row">
-            <div className="brand-mark">AE</div>
-            <div className="brand-copy">
-              <span className="eyebrow">ARCTIC EMERALD</span>
-              <strong>GuardianOS</strong>
-            </div>
-          </div>
-
-          <div className="hero-copy">
-            <span className="kicker">Secure command center</span>
-            <h2>Trusted access for every critical workflow.</h2>
-            <p>
-              Built for teams that need fast onboarding, strong protection, and a seamless
-              experience across every secure session.
-            </p>
-          </div>
-
-          <ul className="feature-list">
-            <li>Zero-trust session handling</li>
-            <li>Realtime protected access</li>
-            <li>Operational clarity at a glance</li>
-          </ul>
-
-          <div className="status-card">
-            <div className="status-header">
-              <span className="status-dot" />
-              <span>System status</span>
-            </div>
-            <div className="status-grid">
-              <div>
-                <small>Latency</small>
-                <strong>12ms</strong>
-              </div>
-              <div>
-                <small>Uptime</small>
-                <strong>99.98%</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="auth-card">
+      <main className="auth-page auth-page--single">
+        <section className="auth-card auth-card--centered">
           <h1>Welcome back</h1>
           <p className="subtitle">Secure sign in to your account</p>
           {error ? <div className="error-box">{error}</div> : null}
@@ -116,8 +74,8 @@ export default function LoginPage() {
             <span className="muted">Need an account? </span>
             <Link to="/register">Register</Link>
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
     </div>
   );
 }

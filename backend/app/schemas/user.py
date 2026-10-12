@@ -24,6 +24,17 @@ class UserCreate(UserBase):
     def normalize_email(cls, value: EmailStr) -> str:
         return str(value).strip().lower()
 
+    @field_validator("password")
+    @classmethod
+    def validate_password_strength(cls, value: str) -> str:
+        if len(value) < 8:
+            raise ValueError("Password must be at least 8 characters long.")
+        if not any(ch.isupper() for ch in value):
+            raise ValueError("Password must contain at least one uppercase letter.")
+        if not any(ch.isdigit() for ch in value):
+            raise ValueError("Password must contain at least one number.")
+        return value
+
     @field_validator("password_confirm")
     @classmethod
     def validate_password_match(cls, value: str, info):

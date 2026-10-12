@@ -27,14 +27,6 @@ def serialize_user(user: User) -> UserOut:
 
 @router.post("/register", status_code=status.HTTP_201_CREATED, response_model=AuthResponse)
 def register_user(payload: UserCreate, db: Session = Depends(get_db_session)):
-    if payload.password != payload.password_confirm:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Passwords do not match.")
-    if len(payload.password) < 8:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Password must be at least 8 characters long.")
-    if not any(ch.isupper() for ch in payload.password):
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Password must contain at least one uppercase letter.")
-    if not any(ch.isdigit() for ch in payload.password):
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Password must contain at least one number.")
     if get_user_by_email(db, payload.email):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email already registered.")
 

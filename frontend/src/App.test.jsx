@@ -14,6 +14,10 @@ describe('App auth flow', () => {
     );
 
     expect(screen.getByText(/Welcome back/i)).toBeInTheDocument();
+    expect(screen.queryByText(/Trusted access for every critical workflow/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Zero-trust session handling/i)).not.toBeInTheDocument();
+    expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
   });
 
   it('routes to registration page', () => {
