@@ -1,0 +1,8 @@
+{
+  "name": "Prodygy Auth",
+  "description": "Secure authentication and user management workspace with JWT token rotation, user profile settings, and sleek dark UI.",
+  "permissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
